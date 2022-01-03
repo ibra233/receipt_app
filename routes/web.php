@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\ViewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +14,8 @@ use App\Http\Controllers\QueryController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('receiptcount',[AddController::class,'receiptcount']);
+Route::get('makereceipt',[AddController::class,'receiptMake']);
 Route::get('/', function () {
     return view('product');
 })->name('product');
@@ -24,3 +26,5 @@ Route::post('addProduct',[AddController::class,'addProduct'])->name('addProduct'
 Route::post('queryProduct',[QueryController::class,'queryProduct']);
 
 Route::post('addReceipt',[AddController::class,'addReceipt']);
+
+Route::get('receiptView',[ViewController::class,'viewReceipts'])->name('receiptView');

@@ -97,17 +97,23 @@ receiptAddButton.addEventListener("click",function(e){
 
     //console.log(id);
     let xhr = new XMLHttpRequest();
-    let form=new FormData();
-    xhr.open("POST", "http://127.0.0.1:8000/addReceipt")
+
+    xhr.open("POST", "http://127.0.0.1:8000/addReceipt");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("X-CSRF-TOKEN", csrf)
-    form.append("id",JSON.stringify(id));
+
+    let data = {ids: id}
     xhr.onload = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-       
-            console.log(xhr.responseText);
+            console.log(JSON.parse(xhr.responseText));
+            receipt.innerHTML="";
+            tori.notification("Fiş başarıyla eklendi.", {
+                type: "success",
+                duration: 5000
+            });
         }
     }
-    xhr.onerror = (err) => reject(err);
-    xhr.send(form);
+
+    xhr.onerror = err => console.log(err);
+    xhr.send(JSON.stringify(data));
 });

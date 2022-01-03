@@ -17,6 +17,7 @@
         <ul class="navbox">
            <a href="{{route('product')}}"><li>Ürün Girdileri</li></a>
            <a href="{{route('receipt')}}"><li>Fiş Girdileri</li></a>
+           <a href="{{route('receiptView')}}"><li>Fişleri göster</li></a>
         </ul>
     </nav>
 

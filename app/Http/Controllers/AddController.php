@@ -31,6 +31,47 @@ class AddController extends Controller
     }
 
     public function addReceipt(Request $request){
-        return $request->id;
+        $lastId=  DB::table('receipt')->insertGetId([
+           
+        ]);
+       
+      $ids= $request->ids;
+     
+
+      for($i=0;$i<count($ids);$i++){
+        DB::table('receipts_products')->insert([
+            'product' => $ids[$i],
+            'receipt' => $lastId,
+            
+        ]);
+
+      }
+        return response()->json("Başarılı");
+    }
+    public function receiptMake(){
+        
+       
+        $quanity=rand(1,9);
+        for($y=0;$y<$quanity;$y++){
+            $ids[]=rand(1,208);
+        }
+        $lastId=  DB::table('receipt')->insertGetId([
+           
+        ]);
+        for($i=0;$i<count($ids);$i++){
+            DB::table('receipts_products')->insert([
+                'product' => $ids[$i],
+                'receipt' => $lastId,
+                
+            ]);
+    
+          }
+        
+        return $ids;
+    }
+    public function receiptcount(){
+        $count=DB::table('receipt')->count();
+
+        return $count;
     }
 }
